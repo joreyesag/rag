@@ -1,0 +1,21 @@
+{
+    "name": "S-RAG Production Env",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ]
+        }
+    },
+    "remoteUser": "vscode",
+    "postCreateCommand": "uv venv && uv pip install torch --index-url https://download.pytorch.org/whl/cpu && uv pip install -r requirements.txt && python -c \"import nltk; nltk.download('wordnet')\""
+}
